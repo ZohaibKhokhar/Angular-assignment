@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Contact } from '../mock-contacts';
+import { Contact } from '../../mock-contacts';
 
 @Component({
   selector: 'app-contact-detail',

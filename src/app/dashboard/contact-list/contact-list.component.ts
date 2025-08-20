@@ -1,13 +1,14 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Contact } from '../mock-contacts';
+import { Contact } from '../../mock-contacts';
+import { HighlightPipe } from '../../pipes/highlight.pipe'; // <-- Add this import
 
 @Component({
   selector: 'app-contact-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, HighlightPipe], // <-- Include the pipe here
   templateUrl: './contact-list.component.html',
-  styleUrl: './contact-list.component.scss'
+  styleUrls: ['./contact-list.component.scss'] // <-- Fixed (plural)
 })
 export class ContactListComponent {
   @Input() contacts: Contact[] = [];

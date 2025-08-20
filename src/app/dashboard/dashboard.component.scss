@@ -1,0 +1,80 @@
+.dashboard {
+  display: flex;
+  gap: 20px;
+  min-height: 100vh;
+  background: #f9fafc;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.left {
+  width: 35%;
+  border-right: 2px solid #e0e0e0;
+  padding: 20px;
+  background: #ffffff;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+}
+
+.right {
+  width: 65%;
+  padding: 20px;
+  background: #ffffff;
+}
+
+h2 {
+  margin-bottom: 15px;
+  font-size: 20px;
+  color: #333;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 5px;
+}
+
+.card {
+  border: 1px solid #ddd;
+  padding: 12px 15px;
+  border-radius: 8px;
+  background: #fafafa;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.card:hover {
+  background: #f1f7ff;
+  transform: translateY(-2px);
+  border-color: #007bff;
+}
+
+.badges span {
+  display: inline-block;
+  margin-right: 6px;
+  font-size: 11px;
+  background: #007bff;
+  color: white;
+  padding: 3px 7px;
+  border-radius: 12px;
+  font-weight: 500;
+}
+
+button {
+  margin: 5px 5px 5px 0;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  background: #007bff;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+button.active {
+  background: #28a745;
+}
+
+.filters {
+  margin-bottom: 15px;
+}

@@ -1,0 +1,26 @@
+<div class="dashboard">
+  <!-- Left Panel -->
+  <div class="left">
+    <input 
+      type="text"
+      [(ngModel)]="searchTerm"
+      appAlphaSpaceOnly
+      placeholder="Search by exact name"
+      (ngModelChange)="applyFilter()">
+
+    <app-contact-list 
+      [contacts]="filteredContacts"
+      [currentFilter]="currentFilter"
+      (filterChange)="setFilter($event)"
+      (selectContact)="setSelected($event)">
+    </app-contact-list>
+  </div>
+
+  <!-- Right Panel -->
+  <div class="right">
+    <app-contact-detail 
+      [contact]="selectedContact"
+      (updateGroups)="updateGroups($event)">
+    </app-contact-detail>
+  </div>
+</div>

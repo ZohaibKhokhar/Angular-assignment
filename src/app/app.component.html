@@ -1,19 +1,6 @@
-<div class="dashboard">
-  <!-- Left Panel -->
-  <div class="left">
-    <app-contact-list 
-      [contacts]="filteredContacts"
-      [currentFilter]="currentFilter"
-      (filterChange)="setFilter($event)"
-      (selectContact)="setSelected($event)">
-    </app-contact-list>
-  </div>
+<nav>
+  <a routerLink="/dashboard">Dashboard</a> | 
+  <a routerLink="/contacts/new">Add Contact</a>
+</nav>
 
-  <!-- Right Panel -->
-  <div class="right">
-    <app-contact-detail 
-      [contact]="selectedContact"
-      (updateGroups)="updateGroups($event)">
-    </app-contact-detail>
-  </div>
-</div>
+<router-outlet></router-outlet>

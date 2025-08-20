@@ -1,0 +1,27 @@
+<div class="filters">
+  @for (f of filters; track f) {
+    <button 
+      (click)="filterChange.emit(f)"
+      [class.active]="f === currentFilter">
+      {{ f }}
+    </button>
+  }
+</div>
+
+<div class="list">
+  @for (c of contacts; track c.name) {
+    <div class="card" (click)="selectContact.emit(c)">
+      <h4>{{ c.name }}</h4>
+      <small>{{ c.phone }}</small>
+      <div class="badges">
+        @for (g of c.groups; track g) {
+          <span>{{ g }}</span>
+        }
+      </div>
+    </div>
+  }
+</div>
+
+@for (c of contacts; track c.name) {
+  <p [innerHTML]="c.name | highlight:currentFilter"></p>
+}

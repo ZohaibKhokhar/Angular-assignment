@@ -1,0 +1,30 @@
+<h2>Add New Contact</h2>
+
+<form [formGroup]="form" (ngSubmit)="addContact()">
+  <label>Name:</label>
+  <input formControlName="name">
+
+  <label>Phone:</label>
+  <input formControlName="phone">
+
+  <label>Email:</label>
+  <input formControlName="email">
+
+  <label>Gender:</label>
+  <select formControlName="gender">
+    <option value="Male">Male</option>
+    <option value="Female">Female</option>
+  </select>
+
+  <label>Address:</label>
+  <input formControlName="address">
+
+  <h4>Groups</h4>
+  <div *ngFor="let g of groups">
+    <button type="button" (click)="toggleGroup(g)">
+      {{ form.value.groups.includes(g) ? 'Remove from ' + g : 'Add to ' + g }}
+    </button>
+  </div>
+
+  <button type="submit" [disabled]="form.invalid">Add Contact</button>
+</form>

@@ -1,30 +1,54 @@
-<h2>Add New Contact</h2>
+<h2 class="title">➕ Add New Contact</h2>
 
-<form [formGroup]="form" (ngSubmit)="addContact()">
-  <label>Name:</label>
-  <input formControlName="name">
-
-  <label>Phone:</label>
-  <input formControlName="phone">
-
-  <label>Email:</label>
-  <input formControlName="email">
-
-  <label>Gender:</label>
-  <select formControlName="gender">
-    <option value="Male">Male</option>
-    <option value="Female">Female</option>
-  </select>
-
-  <label>Address:</label>
-  <input formControlName="address">
-
-  <h4>Groups</h4>
-  <div *ngFor="let g of groups">
-    <button type="button" (click)="toggleGroup(g)">
-      {{ form.value.groups.includes(g) ? 'Remove from ' + g : 'Add to ' + g }}
-    </button>
+<form class="contact-form" [formGroup]="form" (ngSubmit)="addContact()">
+  <div class="form-group">
+    <label>Name</label>
+    <input formControlName="name" placeholder="Enter full name">
   </div>
 
-  <button type="submit" [disabled]="form.invalid">Add Contact</button>
+  <div class="form-group">
+    <label>Phone</label>
+    <input formControlName="phone" placeholder="e.g. +1 234 567 890">
+  </div>
+
+  <div class="form-group">
+    <label>Email</label>
+    <input formControlName="email" placeholder="example@email.com">
+  </div>
+
+  <div class="form-group">
+    <label>Gender</label>
+    <select formControlName="gender">
+      <option value="" disabled selected>Select gender</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>Address</label>
+    <input formControlName="address" placeholder="Street, City">
+  </div>
+
+  <div class="groups">
+    <h4>Groups</h4>
+    <div class="group-buttons">
+      @for (g of groups; track g) {
+        <button type="button"
+                class="group-btn"
+                [class.active]="form.value.groups.includes(g)"
+                (click)="toggleGroup(g)">
+          @if (form.value.groups.includes(g)) {
+            ✓ {{ g }}
+          } @else {
+            + {{ g }}
+          }
+        </button>
+      }
+    </div>
+  </div>
+
+  <button type="submit" class="submit-btn" [disabled]="form.invalid">
+    Add Contact
+  </button>
 </form>

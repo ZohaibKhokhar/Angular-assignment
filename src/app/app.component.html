@@ -1,6 +1,13 @@
-<nav>
-  <a routerLink="/dashboard">Dashboard</a> | 
-  <a routerLink="/contacts/new">Add Contact</a>
+<nav class="navbar">
+  <div class="logo">📒 Contact Manager</div>
+  <div class="nav-links">
+    <a routerLink="/dashboard" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+      Dashboard
+    </a>
+    <a routerLink="/addcontact" routerLinkActive="active-link">
+      Add Contact
+    </a>
+  </div>
 </nav>
 
 <router-outlet></router-outlet>

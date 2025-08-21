@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Contact, generateContacts } from '../mock-contacts';
+import { Contact } from '../mock-contacts';
 import { ContactListComponent } from './contact-list/contact-list.component';
 import { ContactDetailComponent } from './contact-detail/contact-detail.component';
 import { CommonModule } from '@angular/common';
 import { HighlightPipe } from '../pipes/highlight.pipe';
 import { AlphaSpaceOnlyDirective } from '../directives/alpha-space-only.directive';
 import { FormsModule } from '@angular/forms';
+import { AddContactComponent } from '../add-contact/add-contact.component';
+import { ContactService } from '../services/contact.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -28,9 +30,10 @@ export class DashboardComponent implements OnInit {
   selectedContact?: Contact;
   searchTerm: string = '';
 
+  constructor(private contactService: ContactService) {}
+
   ngOnInit() {
-    const saved = localStorage.getItem('contacts');
-    this.contacts = saved ? JSON.parse(saved) : generateContacts();
+    this.contacts = this.contactService.getAll();
     this.applyFilter();
   }
 
@@ -44,9 +47,15 @@ export class DashboardComponent implements OnInit {
   }
 
   updateGroups(updated: Contact) {
-    this.contacts = this.contacts.map(c => c.id === updated.id ? updated : c);
+    this.contactService.updateContact(updated);
+    this.contacts = this.contactService.getAll();
     this.selectedContact = updated;
-    this.persist();
+    this.applyFilter();
+  }
+
+  addContact(newContact: Contact) {
+    this.contactService.addContact(newContact);
+    this.contacts = this.contactService.getAll();
     this.applyFilter();
   }
 
@@ -62,9 +71,5 @@ export class DashboardComponent implements OnInit {
     }
 
     this.filteredContacts = result;
-  }
-
-  private persist() {
-    localStorage.setItem('contacts', JSON.stringify(this.contacts));
   }
 }

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
 import { Contact } from '../mock-contacts';
+import { ContactService } from '../services/contact.service';
 
 @Component({
   selector: 'app-add-contact',
@@ -15,7 +15,7 @@ export class AddContactComponent {
   form: FormGroup;
   groups = ['Favourites', 'Family', 'Friends', 'Classmates'];
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder, private contactService: ContactService) {
     this.form = this.fb.group({
       id: [Date.now()],
       name: ['', Validators.required],
@@ -36,11 +36,15 @@ export class AddContactComponent {
     });
   }
 
-  addContact() {
-    const newContact: Contact = this.form.value;
-    const stored = JSON.parse(localStorage.getItem('contacts') || '[]');
-    stored.push(newContact);
-    localStorage.setItem('contacts', JSON.stringify(stored));
-    this.router.navigate(['/dashboard']);
+addContact() {
+  if (this.form.valid) {
+    const newContact: Contact = {
+      ...this.form.value,
+      id: this.contactService.getNextId()
+    };
+    this.contactService.addContact(newContact);
+    console.log(newContact);
+    this.form.reset({ id: this.contactService.getNextId(), groups: [] });
   }
+}
 }

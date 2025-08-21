@@ -1,18 +1,17 @@
-<div *ngIf="contact; else noContact">
+@if (contact) {
   <h2>{{ contact.name }}</h2>
   <p><strong>Phone:</strong> {{ contact.phone }}</p>
   <p><strong>Email:</strong> {{ contact.email }}</p>
   <p><strong>Gender:</strong> {{ contact.gender }}</p>
   <p><strong>Address:</strong> {{ contact.address }}</p>
 
-
   <div class="toggles">
-    <button *ngFor="let g of groups" (click)="toggleGroup(g)">
-      {{ contact.groups.includes(g) ? 'Remove from ' + g : 'Add to ' + g }}
-    </button>
+    @for (g of groups; track g) {
+      <button (click)="toggleGroup(g)">
+        {{ contact.groups.includes(g) ? 'Remove from ' + g : 'Add to ' + g }}
+      </button>
+    }
   </div>
-</div>
-
-<ng-template #noContact>
+} @else {
   <p>Select a contact to see details.</p>
-</ng-template>
+}
